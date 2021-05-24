@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+        name: service-api-{{ .Release.Name }}
+        labels:
+                app: {{ .Values.api.appLabel }}
+        namespace: {{ .Release.Namespace }}
+spec:
+        selector:
+                app: {{ .Values.api.appLabel }} 
+        ports:
+        - protocol: TCP
+          port: 81 #service port
+          targetPort: 80 #container port
+

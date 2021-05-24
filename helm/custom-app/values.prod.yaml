@@ -1,0 +1,6 @@
+api:
+        replicas: 2
+        path: /prod/api
+email:
+        replicas: 3
+        path: /prod/email

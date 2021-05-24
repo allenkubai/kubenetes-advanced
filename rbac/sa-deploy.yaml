@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-sa
+  labels:
+    app: sa-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sa-deploy
+  template:
+    metadata:
+      labels:
+        app: sa-deploy
+    spec:
+      serviceAccountName: default
+      containers:
+      - name: nginx
+        image: nginx:1.20.0
+        ports:
+        - containerPort: 80
+

@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+        name: {{ .Release.Name }}-ingress
+        labels:
+                app: {{ .Values.global.appLabel }}
+        annotations:
+                nginx.ingress.kubernetes.io/rewrite-target: /$2
+        namespace: {{ .Release.Namespace }}
+spec:
+        ingressClassName: "nginx"
+        rules:
+        - host: {{ .Values.global.host }}
+          http:
+            paths:
+            - path: {{ .Values.email.path }}
+              pathType: Prefix
+              backend:
+                      service:
+                              name: service-email-{{ .Release.Name }}
+                              port:
+                                      number: {{ .Values.email.servicePort }}
+            - path: {{ .Values.api.path }}
+              pathType: Prefix
+              backend:
+                      service:
+                              name: service-api-{{ .Release.Name }}
+                              port:
+                                      number: {{ .Values.api.servicePort }}
+

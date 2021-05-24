@@ -1,0 +1,19 @@
+api:
+        replicas: 4
+        appLabel: custom-api
+        imageTag: 1.20.0
+        nginxPort: 80
+        servicePort: 81
+        path: /api
+email:
+        replicas: 3
+        appLabel: custom-email
+        imageTag: 1.20.0
+        nginxPort: 80
+        servicePort: 81
+        path: /email
+
+global:
+        host: ec2-18-132-63-151.eu-west-2.compute.amazonaws.com 
+        appLabel: custom-nginx
+

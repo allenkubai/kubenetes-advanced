@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+        name: service-email-{{ .Release.Name }}
+        labels:
+                app: {{ .Values.email.appLabel }}
+        namespace: {{ .Release.Namespace }}
+spec:
+        selector:
+                app: {{ .Values.email.appLabel }}
+        ports:
+        - protocol: TCP
+          port: {{ .Values.email.servicePort }} #service port
+          targetPort: {{ .Values.email.nginxPort }} #container port
+

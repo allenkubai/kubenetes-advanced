@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata: 
+        name: logging-cleanup
+        labels:
+                app: nginx-cleanup
+spec:
+        selector:
+                matchLabels:
+                        app: nginx-cleanup
+        template:
+                metadata:
+                        labels:
+                                app: nginx-cleanup
+                spec:
+                        containers:
+                        - name: cleanup
+                          image: nginx:1.20.0
+                          ports:
+                          - containerPort: 80
+

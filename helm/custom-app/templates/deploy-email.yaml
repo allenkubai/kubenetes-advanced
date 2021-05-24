@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-deploy-{{ .Release.Name }}
+  labels:
+    app: {{ .Values.email.appLabel }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.email.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.email.appLabel }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.email.appLabel }}
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:{{ .Values.email.imageTag }}
+        ports:
+        - containerPort: {{ .Values.email.nginxPort }}
+

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deploy-{{ .Release.Name }}
+  labels:
+    app: {{ .Values.api.appLabel }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.api.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.api.appLabel }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.api.appLabel }}
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:{{ .Values.api.imageTag }}
+        ports:
+        - containerPort: {{ .Values.api.nginxPort }}
+

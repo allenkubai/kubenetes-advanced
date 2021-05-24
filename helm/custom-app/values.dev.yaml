@@ -1,0 +1,6 @@
+api:
+        replicas: 2
+        path: /dev/api
+email:
+        replicas: 3
+        path: /dev/email

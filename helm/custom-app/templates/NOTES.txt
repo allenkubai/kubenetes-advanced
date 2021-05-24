@@ -1,0 +1,1 @@
+My custom application deployed on {{ .Release.Namespace }}

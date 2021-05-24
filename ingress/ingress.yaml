@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+        name: my-app-ingress
+        labels:
+                app: my-app
+        annotations:
+                nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+        ingressClassName: "nginx"
+        rules:
+        - host: ec2-18-132-63-151.eu-west-2.compute.amazonaws.com
+          http:
+            paths: 
+            - path: /email
+              pathType: Prefix
+              backend:
+                      service:
+                              name: service-email
+                              port:
+                                      number: 81
+            - path: /api
+              pathType: Prefix
+              backend:
+                      service:
+                              name: service-api
+                              port:
+                                      number: 81
+
+
